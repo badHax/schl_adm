@@ -1,0 +1,27 @@
+﻿<style>
+    .success{
+        color:#fff;
+        background-color:forestgreen;
+    }
+    .error {
+        color:#fff;
+        background-color:red;
+    }
+    .warning{
+        color:#ffffff;
+        background-color:darkgoldenrod;
+    }
+</style>
+<div id="flash-messages" class="alert" style="display:none;">
+    <a class="close" href="#">&times;</a>
+    <p></p>
+</div>
+<script type="text/javascript">
+    window.onload = 
+        function (e)
+        {
+            $(function () {
+                $("#flash-messages").flashMessage();
+            });
+        };
+</script>

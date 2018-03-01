@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SchoolAdmin.Domain.Course>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreditHours)
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreditHours)
+        </td>
+        <td>
+            <!-- POST: Account/Logoff form-->
+            <script type="text/javascript">
+                        function getCourseEnrollment() {
+                            var form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "@Url.Action("GetCourseEnrollment", "Grade", new {item.Id})";
+                            form.insertAdjacentHTML("afterbegin", '@Html.AntiForgeryToken()');
+                            document.body.appendChild(form)
+                            form.submit();
+                        }
+            </script>
+                <a href="#" onclick="getCourseEnrollment()">
+                    Edit Grades
+                </a>
+      </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Images/apple-icon.png" />
+    <link rel="icon" type="image/png" href="~/images/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Dashboard</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!--  Material Dashboard CSS  ,Fonts Icons  -->
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/material-css")
+    <!-- Icon sizing -->
+    <style>
+        .material-icons.md-18 {
+            font-size: 18px;
+        }
+
+        .material-icons.md-24 {
+            font-size: 24px;
+        }
+
+        .material-icons.md-36 {
+            font-size: 36px;
+        }
+
+        .material-icons.md-48 {
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-fixed">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"> <b>School Administrator</b></a>
+            </div>
+
+            <!-- POST: Account/Logoff form-->
+            <script type="text/javascript">
+                        function Logoff() {
+                            var form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "@Url.Action("Logoff", "Account")";
+                            form.insertAdjacentHTML("afterbegin", '@Html.AntiForgeryToken()');
+                            document.body.appendChild(form)
+                            form.submit();
+                        }
+            </script>
+            <div class="collapse navbar-collapse">
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">person</i>
+                                    <p class="hidden-lg hidden-md">Profile</p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" onclick="Logoff()">
+                                            Logoff
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                                <form class="navbar-form navbar-right" role="search">
+                                    <div class="form-group  is-empty">
+                                        <input type="text" class="form-control" placeholder="Search">
+                                        <span class="material-input"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                        <i class="material-icons">search</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </form>
+
+                    }
+                    else
+                    {
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li>
+                                    <a href="#">
+                                        Testimonials
+                                        <i style="font-size: 26px;" class="material-icons">record_voice_over</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Features
+                                        <i style="font-size: 26px;" class="material-icons">play_for_work</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Apply
+                                        <i style="font-size: 26px;" class="material-icons">stars</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        About
+                                        <i style="font-size: 26px;" class="material-icons">more</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Login","Account")">
+                                        Login
+                                        <i style="font-size:26px;" class="material-icons">lock</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue">
+            <script type="text/javascript">
+
+               //POST: Student/List
+                function ListStudents() {
+                            var form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "@Url.Action("Index", "Student")";
+                            form.insertAdjacentHTML("afterbegin", '@Html.AntiForgeryToken()');
+                            document.body.appendChild(form)
+                            form.submit();
+                }
+                //POST: Course/List
+                function ListCourses() {
+                            var form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "@Url.Action("List", "Course")";
+                            form.insertAdjacentHTML("afterbegin", '@Html.AntiForgeryToken()');
+                            document.body.appendChild(form)
+                            form.submit();
+                }
+            </script>
+            @{
+                if (User.Identity.IsAuthenticated)
+                {
+                    <div class="sidebar-wrapper">
+                        <ul class="nav">
+                            
+                            @{
+                                if (((RazorView)ViewContext.View).ViewPath.Contains("Dashboard"))
+                                {
+                                    <li class="active">
+                                        <a href="@Url.Action("Dashboard", "Home")">
+                                            <i class="material-icons">dashboard</i>
+                                            <p>Dashboard</p>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Dashboard", "Home")">
+                                            <i class="material-icons">dashboard</i>
+                                            <p>Dashboard</p>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            @{
+                                if (((RazorView)ViewContext.View).ViewPath.Contains("Report"))
+                                {
+                                    <li class="active">
+                                        <a href="#">
+                                            <i class="material-icons">assignment</i>
+                                            <p>Reports</p>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="#">
+                                            <i class="material-icons">assignment</i>
+                                            <p>Reports</p>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            
+                            @{
+                                if (((RazorView)ViewContext.View).ViewPath.Contains("Student"))
+                                {
+                                    <li class="active">
+                                        <a href="#" onclick="ListStudents()">
+                                            <i class="material-icons">featured_play_list</i>
+                                            <p>Student Management</p>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="#" onclick="ListStudents()">
+                                            <i class="material-icons">featured_play_list</i>
+                                            <p>Student Management</p>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            @{
+                                if (((RazorView)ViewContext.View).ViewPath.Contains("Course"))
+                                {
+                                    <li class="active">
+                                        <a href="#" onclick="ListCourses()">
+
+                                            <i class="material-icons">school</i>
+                                            <p>Course Management</p>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="#" onclick="ListCourses()">
+
+                                            <i class="material-icons">school</i>
+                                            <p>Course Management</p>
+                                        </a>
+                                    </li>
+                                    }
+
+                                }
+                            @{
+                                if (((RazorView)ViewContext.View).ViewPath.Contains("Staff"))
+                                {
+                                    <li>
+                                        <a href="#" class="active">
+                                            <i class="material-icons">supervisor_account</i>
+                                            <p>Staff Management</p>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="#">
+                                            <i class="material-icons">supervisor_account</i>
+                                            <p>Staff Management</p>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            
+                        </ul>
+                    </div>
+                }
+            }
+        </div>
+        <div class="main-panel">
+            @Html.Partial("_Flash")
+            <div class="content">
+                @RenderBody()
+            </div>
+            @Html.Partial("_Footer")
+        </div>
+       </div>
+    
+       
+</body>
+<!--   Core JS Files   -->
+@RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/material-js")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/flash-messages")
+</html>

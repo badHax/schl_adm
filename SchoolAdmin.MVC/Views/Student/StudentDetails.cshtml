@@ -1,0 +1,63 @@
+﻿@using System.Collections.Generic;
+@using SchoolAdmin.Domain;
+@model SchoolAdmin.Domain.Student
+
+<div class="container-fluid">
+    <div class="col-md-4">
+        <div class="card card-profile">
+            <div class="card-avatar">
+                <a href="#pablo">
+                    <img class="img" src="~/Images/blank-avatar.png" />
+                </a>
+            </div>
+            <div class="content">
+                <h6 class="category text-gray">{Student-Type}</h6>
+                <h4 class="card-title">@Model.FirstName @Model.LastName</h4>
+                <p class="card-content">
+                    {Student_Profile_Notes}
+                </p>
+                <a href="#pablo" class="btn btn-primary btn-round">Edit Student Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 col-md-12">
+    <div class="card">
+        <div class="card-header" data-background-color="blue">
+            <h4 class="title">Grade Point Average</h4>
+            <p class="category">Student cumulative GPA</p>
+        </div>
+        <p class="card-content"><b>@ViewBag.GPA</b></p>
+    </div>
+</div>
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title">Student Grades</h4>
+                <p class="category">List of the grades the student has on file</p>
+            </div>
+            <div class="card-content table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-warning">
+                    <th>Course Name</th>
+                    <th>Value</th>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.Grades)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Course.CourseName
+                                    </td>
+                                    <td>
+                                        @item.Value
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
